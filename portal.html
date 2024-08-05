@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Page</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+    h1 {
+      font-size: 20px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    img {
+      height: 60px;
+    }
+    .form-container {
+      background-color: #f8f9fa;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .logo-link {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .form-title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="form-container mt-5">
+          <div class="logo-link">
+            <a target="_blank" href="https://zidumile.co.za">
+              <img src="./assets/logo-ligh.jpg" alt="Logo" style="height:60px;"> 
+            </a>
+          </div>
+          <a target="_blank" href="index.html" class="d-flex justify-content-center mb-3">Zidumile | HomePage</a>
+          <h1 class="form-title">Upload Your CV with File Upload. CV should be a Word Document.</h1>
+          <form id="submitForm" action="https://getform.io/f/bgdydqqa" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="exampleInputName">Full Name</label>
+              <input type="text" name="fullname" class="form-control" id="exampleInputName" placeholder="Enter your name and surname" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Favourite Platform</label>
+              <select class="form-control" id="exampleFormControlSelect1" name="platform" required>
+                <option>Github</option>
+                <option>Gitlab</option>
+                <option>Bitbucket</option>
+              </select>
+            </div>
+            <hr>
+            <div class="form-group mt-3">
+              <label class="mr-2">Upload your CV:</label>
+              <input type="file" name="file" class="form-control-file" required>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  
+
+  <!-- Custom JS to handle form submission and redirection -->
+  <script>
+    document.getElementById('submitForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Create a FormData object to hold the form data
+      var formData = new FormData(this);
+
+      // Perform an AJAX request to submit the form data
+      fetch(this.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          // Redirect to the index.html page upon successful submission
+          window.location.href = 'index.html';
+        } else {
+          // Handle any errors
+          alert('There was an error submitting the form. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error submitting the form. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>
